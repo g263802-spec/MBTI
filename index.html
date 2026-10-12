@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>3분 컷 MBTI — 줴줴이야~</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;600;700;800&display=swap');
+:root{--bg:#f7f4ff;--card:#fff;--ink:#171521;--muted:#756f82;--accent:#7c3aed;--accent2:#ec4899;--line:#ebe6f4;--good:#10b981}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(135deg,#f8f5ff,#fff7fb);color:var(--ink);font-family:'Noto Sans KR',sans-serif}
+.wrap{max-width:760px;margin:auto;padding:22px 16px 60px}.hero{text-align:center;padding:28px 8px 20px}
+.logo{display:inline-block;background:#171521;color:white;border-radius:999px;padding:8px 13px;font-weight:800;font-size:13px}
+h1{font-family:Jua,sans-serif;font-size:44px;line-height:1.05;margin:16px 0 8px;letter-spacing:-1px}
+.grad{background:linear-gradient(90deg,#7c3aed,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);font-size:15px;line-height:1.6}
+.card{background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:0 16px 50px rgba(52,35,90,.08);backdrop-filter:blur(8px)}
+.btn{border:0;border-radius:17px;padding:15px 20px;font-weight:800;font-size:16px;cursor:pointer;transition:.15s}
+.btn:active{transform:scale(.98)} .primary{background:linear-gradient(90deg,#7c3aed,#ec4899);color:white;width:100%}
+.secondary{background:#f2eef9;color:#3b3347}.tiny{font-size:12px;padding:10px 13px}
+.hidden{display:none!important}.start-pills{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:18px 0 22px}
+.pill{background:#f1ebff;color:#5b21b6;border-radius:999px;padding:7px 11px;font-size:12px;font-weight:800}
+.topline{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;font-weight:700;margin-bottom:9px}
+.bar{height:10px;background:#eee9f5;border-radius:99px;overflow:hidden}.bar>i{display:block;height:100%;background:linear-gradient(90deg,#7c3aed,#ec4899);width:0;transition:.25s}
+.qnum{font-size:13px;color:#7c3aed;font-weight:900;margin-top:22px}.q{font-family:Jua,sans-serif;font-size:27px;line-height:1.35;margin:8px 0 20px}
+.answers{display:grid;gap:10px}.answer{background:white;border:2px solid var(--line);border-radius:18px;padding:16px;text-align:left;font-size:15px;font-weight:700;cursor:pointer}
+.answer:hover{border-color:#b69be9;background:#fbf9ff}.answer.selected{border-color:#7c3aed;background:#f4efff;box-shadow:0 0 0 3px #eee4ff}
+.nav{display:flex;gap:10px;margin-top:18px}.nav .btn{flex:1}
+.result{text-align:center}.type{font-family:Jua,sans-serif;font-size:70px;letter-spacing:2px;margin:4px 0;background:linear-gradient(90deg,#7c3aed,#ec4899);-webkit-background-clip:text;color:transparent}
+.result h2{font-size:22px;margin:0 0 7px}.desc{color:var(--muted);line-height:1.65;font-size:14px}
+.scores{display:grid;gap:10px;text-align:left;margin:22px 0}.scoreline{display:flex;justify-content:space-between;font-size:12px;font-weight:800;margin-bottom:5px}.scorebar{height:9px;background:#eee9f5;border-radius:9px;overflow:hidden}.scorebar i{display:block;height:100%;background:linear-gradient(90deg,#7c3aed,#ec4899)}
+.celeb{margin-top:22px}.celeb h3{font-size:17px;margin-bottom:5px}.celeb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.person{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:#fff;text-align:left}.person img{width:100%;height:190px;object-fit:cover;background:#eee9f5;display:block}.person div{padding:10px 12px;font-weight:800}.person small{display:block;color:var(--muted);font-weight:500;margin-top:3px}
+.note{font-size:11px;color:#8b8395;line-height:1.5;margin-top:12px}
+.qrbox{margin-top:25px;padding:18px;border-radius:20px;background:#faf8ff;border:1px dashed #d8cbed}.qrbox h3{margin:0 0 5px}.qr{display:flex;justify-content:center;margin:14px 0}.url{font-size:11px;color:#8b8395;word-break:break-all}
+footer{text-align:center;color:#9a92a5;font-size:11px;margin-top:22px}
+@media(max-width:520px){h1{font-size:38px}.card{padding:20px;border-radius:23px}.q{font-size:24px}.person img{height:160px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <span class="logo">✨ 3분 컷 · 친구들이랑 하기 딱 좋음</span>
+    <h1><span class="grad">MBTI</span> 해볼래?<br>줴줴이야~ 😎</h1>
+    <p class="sub">16문제만 고르면 끝!<br>엄.... 고민하지 말고 <b>평소의 나</b>로 골라봐. 예?</p>
+    <div class="start-pills"><span class="pill">⏱ 약 3분</span><span class="pill">📱 모바일 최적화</span><span class="pill">📊 결과 바로 확인</span><span class="pill">📸 QR 공유</span></div>
+  </section>
+
+  <section id="start" class="card">
+    <p style="margin-top:0;font-weight:800">🎯 이런 사람에게 추천</p>
+    <p class="desc">“나는 대충 어떤 MBTI일까?” 궁금한 사람, 친구들이랑 결과 비교하고 싶은 사람, 그리고 <b>장원영(예쁜 거)</b> 좋아하는 사람까지.</p>
+    <button class="btn primary" onclick="startQuiz()">아자스! 검사 시작하기 →</button>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="topline"><span id="progressText">1 / 16</span><span id="pct">6%</span></div>
+    <div class="bar"><i id="bar"></i></div>
+    <div class="qnum" id="qnum">Q1</div>
+    <div class="q" id="question"></div>
+    <div class="answers" id="answers"></div>
+    <div class="nav">
+      <button class="btn secondary" id="prev" onclick="prevQ()">← 이전</button>
+      <button class="btn primary" id="next" onclick="nextQ()">다음 →</button>
+    </div>
+  </section>
+
+  <section id="result" class="card hidden result">
+    <div style="font-size:13px;color:#7c3aed;font-weight:900">🎉 검사 완료! 티~원!!!</div>
+    <div class="type" id="type">ENFP</div>
+    <h2 id="typeName"></h2>
+    <p class="desc" id="typeDesc"></p>
+    <div class="scores" id="scores"></div>
+
+    <div class="celeb">
+      <h3>✨ 나와 같은 MBTI로 알려진 셀럽</h3>
+      <p class="desc">공개 인터뷰·프로필 등에서 알려진 유형을 재미로 참고해줘!</p>
+      <div class="celeb-grid" id="celebGrid"></div>
+      <p class="note">※ 연예인의 MBTI는 시점·검사 방식에 따라 달라질 수 있어요. 아래 정보는 오락용 참고입니다.</p>
+    </div>
+
+    <div class="qrbox">
+      <h3>📱 친구에게 QR로 공유</h3>
+      <div class="desc">이 페이지를 인터넷에 올린 뒤 QR을 찍으면 바로 접속할 수 있어!</div>
+      <div class="qr" id="qrcode"></div>
+      <div class="url" id="urlText"></div>
+    </div>
+
+    <div style="display:flex;gap:9px;margin-top:18px">
+      <button class="btn secondary" style="flex:1" onclick="restart()">다시 하기</button>
+      <button class="btn primary" style="flex:1" onclick="shareResult()">결과 공유</button>
+    </div>
+  </section>
+  <footer>재미로 보는 간단 MBTI · 전문 심리검사가 아닙니다</footer>
+</div>
+
+<script>
+const questions = [
+["친구들이 갑자기 만나자고 한다. 나는…", "E", "줴줴이야~ 바로 나감 😎", "I", "엄.... 집이 최고인데?"],
+["사람 많은 파티에 가면 나는…", "E", "일단 사람부터 찾는다. 야르~", "I", "조용한 구석에서 배터리 충전"],
+["새로운 모임에서 나는…", "E", "먼저 말 걸기! 아자스!", "I", "누가 먼저 말 걸어주길 기다림"],
+["하루 종일 혼자 있어도?", "E", "심심해서 누군가에게 연락함", "I", "오히려 개꿀… 에너지 충전"],
+["설명 들을 때 더 꽂히는 건?", "S", "구체적인 예시와 실제 경험", "N", "큰 그림과 '그래서 미래엔?'"],
+["친구가 여행 계획을 짠다면?", "S", "시간·장소·맛집까지 체크", "N", "일단 가! 현지에서 정하자 야르"],
+["새 물건을 볼 때 나는?", "S", "실용적인가? 가격은?", "N", "이거 뭔가 느낌 있는데?"],
+["수업/회의에서 기억에 남는 건?", "S", "실제로 했던 내용", "N", "아이디어랑 가능성"],
+["친구가 고민을 털어놓으면?", "T", "해결책부터 찾음. 쥐랄~~~ 하지 말고 해결!", "F", "일단 공감부터… 괜찮아🥹"],
+["팀플에서 의견 충돌이 나면?", "T", "논리적으로 뭐가 맞는지 보자", "F", "분위기 안 깨지게 조율하자"],
+["누가 내 실수를 지적하면?", "T", "맞는 말이면 바로 고침", "F", "말투가 좀 아픈데… 엄...."],
+["친구가 선물을 골라달라면?", "T", "가격·활용도·후기 분석", "F", "상대가 좋아할 감성부터 생각"],
+["여행 전날 나는?", "J", "계획표 완성! 짯스!!!", "P", "대충 가면 되지 뭐~"],
+["마감이 일주일 뒤라면?", "J", "미리 해두면 마음이 편함", "P", "일단 밤티… 막판 집중력이 찐임"],
+["주말 약속이 갑자기 취소되면?", "J", "아쉽지만 다음 계획 세움", "P", "오히려 좋아! 자유시간 야르~"],
+["방학/휴일에 더 가까운 나는?", "J", "할 일 목록을 만들어 둠", "P", "그날 기분 따라 움직임"]
+];
+
+const types = {
+INTJ:["전략가","조용하지만 큰 그림을 보고 끝까지 파고드는 타입.","카리나","박소담"],
+INTP:["논리술사","궁금한 건 끝까지 파헤치는 아이디어 탐구자.","정재형","진"],
+ENTJ:["통솔자","목표가 생기면 바로 판을 짜고 밀어붙이는 리더형.","희철","지코"],
+ENTP:["변론가","새로운 아이디어와 토론을 즐기는 발상 폭발형.","라미란","강민경"],
+INFJ:["옹호자","조용히 관찰하면서 사람과 의미를 깊게 생각하는 타입.","태연","김남주"],
+INFP:["중재자","감성·가치관이 뚜렷하고 자기만의 세계가 있는 타입.","아이유","정국"],
+ENFJ:["선도자","사람을 챙기고 분위기를 이끄는 따뜻한 리더형.","수지","강다니엘"],
+ENFP:["활동가","호기심 많고 에너지 넘치는 아이디어·친화력 만렙.","전소미","뷔"],
+ISTJ:["현실주의자","책임감과 디테일로 차근차근 해내는 믿음직 타입.","차은우","서장훈"],
+ISFJ:["수호자","세심하게 챙기고 주변 사람을 편하게 해주는 타입.","정연","김연아"],
+ESTJ:["경영자","현실적인 판단과 추진력으로 일을 정리하는 타입.","소연","김구라"],
+ESFJ:["집정관","사람들과 잘 어울리고 모두가 편한 분위기를 만드는 타입.","장원영","박보영"],
+ISTP:["장인","필요할 때 조용히 해결하는 실전·문제해결형.","한","현아"],
+ISFP:["모험가","자유롭고 섬세하며 자기 감각을 중요하게 여기는 타입.","백예린","윈터"],
+ESTP:["사업가","순간 판단과 행동력이 빠른 현실 플레이어.","김종국","전현무"],
+ESFP:["연예인","분위기를 살리고 지금 이 순간을 제대로 즐기는 타입.","조세호","화사"]
+};
+
+// Wikipedia thumbnails are loaded in-browser; if unavailable, the card still shows the name.
+async function wikiThumb(name){
+  try{
+    const u='https://ko.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(name);
+    const r=await fetch(u); const d=await r.json();
+    return d.thumbnail?.source || '';
+  }catch(e){return ''}
+}
+let idx=0, answers=Array(questions.length).fill(null);
+
+function startQuiz(){
+  document.getElementById('start').classList.add('hidden');
+  document.getElementById('quiz').classList.remove('hidden');
+  renderQ();
+}
+function renderQ(){
+  const [q,a1,t1,a2,t2]=questions[idx];
+  document.getElementById('progressText').textContent=`${idx+1} / ${questions.length}`;
+  const pct=Math.round((idx+1)/questions.length*100);
+  document.getElementById('pct').textContent=pct+'%';
+  document.getElementById('bar').style.width=pct+'%';
+  document.getElementById('qnum').textContent='Q'+(idx+1);
+  document.getElementById('question').textContent=q;
+  const box=document.getElementById('answers'); box.innerHTML='';
+  [[a1,t1],[a2,t2]].forEach(([code,text])=>{
+    const b=document.createElement('button'); b.className='answer'+(answers[idx]===code?' selected':'');
+    b.textContent=text; b.onclick=()=>{answers[idx]=code; renderQ()};
+    box.appendChild(b);
+  });
+  document.getElementById('prev').disabled=idx===0;
+  document.getElementById('next').textContent=idx===questions.length-1?'결과 보기 🎉':'다음 →';
+}
+function nextQ(){
+  if(!answers[idx]){alert('하나 골라줘! 예? 😎');return}
+  if(idx<questions.length-1){idx++;renderQ();window.scrollTo({top:0,behavior:'smooth'})}
+  else showResult();
+}
+function prevQ(){if(idx>0){idx--;renderQ()}}
+function calc(){
+  const s={E:0,I:0,S:0,N:0,T:0,F:0,J:0,P:0};
+  answers.forEach(x=>s[x]++);
+  return {s,type:(s.E>=s.I?'E':'I')+(s.S>=s.N?'S':'N')+(s.T>=s.F?'T':'F')+(s.J>=s.P?'J':'P')};
+}
+async function showResult(){
+  const {s,type}=calc();
+  document.getElementById('quiz').classList.add('hidden'); document.getElementById('result').classList.remove('hidden');
+  document.getElementById('type').textContent=type;
+  document.getElementById('typeName').textContent=types[type][0];
+  document.getElementById('typeDesc').textContent=types[type][1];
+  const pairs=[['E','I','외향 ↔ 내향'],['S','N','현실 ↔ 직관'],['T','F','논리 ↔ 감정'],['J','P','계획 ↔ 즉흥']];
+  document.getElementById('scores').innerHTML=pairs.map(([a,b,label])=>{
+    const total=s[a]+s[b]||1, pa=Math.round(s[a]/total*100);
+    const left=s[a]>=s[b]?a:b, p=Math.max(pa,100-pa);
+    return `<div><div class="scoreline"><span>${label}</span><span>${left} ${p}%</span></div><div class="scorebar"><i style="width:${p}%"></i></div></div>`
+  }).join('');
+  const grid=document.getElementById('celebGrid'); grid.innerHTML='';
+  const names=[types[type][2],types[type][3]];
+  names.forEach(async name=>{
+    const card=document.createElement('div'); card.className='person';
+    card.innerHTML=`<img alt="${name}" src="" /><div>${name}<small>${type}로 알려진 셀럽</small></div>`;
+    grid.appendChild(card);
+    const src=await wikiThumb(name); if(src) card.querySelector('img').src=src;
+    else card.querySelector('img').style.display='none';
+  });
+  const qr=document.getElementById('qrcode'); qr.innerHTML='';
+  const url=location.href; document.getElementById('urlText').textContent=url;
+  if(window.QRCode && /^https?:/i.test(url)) new QRCode(qr,{text:url,width:180,height:180,correctLevel:QRCode.CORRECT_LEVEL.M});
+  else qr.innerHTML='<div class="note">인터넷에 게시한 뒤 이 페이지를 열면 QR이 자동 생성돼요.</div>';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function restart(){idx=0;answers=Array(questions.length).fill(null);document.getElementById('result').classList.add('hidden');document.getElementById('quiz').classList.remove('hidden');renderQ();window.scrollTo({top:0,behavior:'smooth'})}
+async function shareResult(){
+  const {type}=calc(); const text=`내 MBTI는 ${type}! 3분 컷 MBTI 결과 🎉`;
+  if(navigator.share){try{await navigator.share({title:'3분 컷 MBTI',text,url:location.href})}catch(e){}}
+  else{await navigator.clipboard?.writeText(text+' '+location.href);alert('결과 링크를 복사했어!')}
+}
+</script>
+</body>
+</html>
